@@ -123,7 +123,7 @@ gmf.Authentication.prototype.load_ = function() {
   var url = goog.uri.utils.appendPath(
       this.baseUrl_, gmf.AuthenticationRouteSuffix.IS_LOGGED_IN);
   this.$http_.get(url, {withCredentials: true}).then(
-      goog.bind(this.handleLogin_, this));
+      this.handleLogin_.bind(this));
 };
 
 
@@ -166,7 +166,7 @@ gmf.Authentication.prototype.login = function(login, pwd) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     withCredentials: true
   }).then(
-      goog.bind(this.handleLogin_, this));
+      this.handleLogin_.bind(this));
 };
 
 
@@ -178,7 +178,7 @@ gmf.Authentication.prototype.logout = function() {
   var url = goog.uri.utils.appendPath(
       this.baseUrl_, gmf.AuthenticationRouteSuffix.LOGOUT);
   return this.$http_.get(url, {withCredentials: true}).then(
-      goog.bind(this.resetUser_, this));
+      this.resetUser_.bind(this));
 };
 
 
@@ -203,7 +203,7 @@ gmf.Authentication.prototype.resetPassword = function(login) {
         var respData = /** @type {gmf.AuthenticationDefaultResponse} */ (
             resp.data);
         return respData;
-      }, this));
+      }, this))
 };
 
 

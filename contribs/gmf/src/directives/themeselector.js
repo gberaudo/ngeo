@@ -67,13 +67,13 @@ gmf.ThemeselectorController = function($scope, ngeoLocation, gmfThemes) {
    */
   this.currentTheme;
 
-  $scope.$watch(goog.bind(function() {
+  $scope.$watch(function() {
     return this.currentTheme;
-  }, this), goog.bind(function(theme) {
+  }.bind(this), function(theme) {
     if (theme) {
       this.setLocationPath_(theme['name']);
     }
-  }, this));
+  }.bind(this));
 
   /**
    * @type {string}

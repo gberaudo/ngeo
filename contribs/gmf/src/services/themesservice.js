@@ -130,7 +130,7 @@ gmf.Themes.prototype.getBgLayers = function() {
             return this.layerHelper_.createWMTSLayerFromCapabilitites(
                 item['url'],
                 item['name']
-            ).then(goog.bind(callback, this, item)).then(null, function(error) {
+            ).then(callback.bind(this, item)).then(null, function(error) {
               console.error(error || 'unknown error');
               // Continue even if some layers have failed loading.
               return $q.resolve(undefined);
@@ -140,23 +140,23 @@ gmf.Themes.prototype.getBgLayers = function() {
         return $q.all(promises);
       }, this))
 
-    .then(goog.bind(function(values) {
-      var layers = [];
+  .then(function(values) {
+    var layers = [];
 
-      // (1) add a blank layer
-      layers.push(new ol.layer.Tile({
-        'label': 'blank',
-        'metadata': {'thumbnail': ''}
-      }));
+    // (1) add a blank layer
+    layers.push(new ol.layer.Tile({
+      'label': 'blank',
+      'metadata': {'thumbnail': ''}
+    }));
 
-      // (2) add layers that were returned
-      values.forEach(function(item) {
-        if (item) {
-          layers.push(item);
-        }
-      });
-      return layers;
-    }, this));
+    // (2) add layers that were returned
+    values.forEach(function(item) {
+      if (item) {
+        layers.push(item);
+      }
+    });
+    return layers;
+  }.bind(this));
 };
 
 

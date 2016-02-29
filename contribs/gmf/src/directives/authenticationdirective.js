@@ -179,11 +179,11 @@ gmf.AuthenticationController.prototype.changePassword = function() {
 
   var error = this.gettextCatalog.getString('Could not change password.');
   this.gmfAuthentication_.changePassword(oldPwd, newPwd, confPwd).then(
-      goog.bind(function() {
+      function() {
         this.changePasswordModalShown = true;
         this.changePasswordReset();
-      }, this),
-      goog.bind(this.setError_, this, error));
+      }.bind(this),
+      this.setError_.bind(this, error));
 };
 
 
@@ -194,8 +194,8 @@ gmf.AuthenticationController.prototype.changePassword = function() {
 gmf.AuthenticationController.prototype.login = function() {
   var error = this.gettextCatalog.getString('Could not connect.');
   this.gmfAuthentication_.login(this.loginVal, this.pwdVal).then(
-      goog.bind(this.resetError_, this),
-      goog.bind(this.setError_, this, error));
+      this.resetError_.bind(this),
+      this.setError_.bind(this, error));
 };
 
 
@@ -206,8 +206,8 @@ gmf.AuthenticationController.prototype.login = function() {
 gmf.AuthenticationController.prototype.logout = function() {
   var error = this.gettextCatalog.getString('Could not log out.');
   this.gmfAuthentication_.logout().then(
-      goog.bind(this.resetError_, this),
-      goog.bind(this.setError_, this, error));
+      this.resetError_.bind(this),
+      this.setError_.bind(this, error));
 };
 
 
@@ -235,8 +235,8 @@ gmf.AuthenticationController.prototype.resetPassword = function() {
           },
           this
       ),
-      goog.bind(this.setError_, this, error)
-  );
+      this.setError_.bind(this, error)
+    );
 };
 
 
