@@ -225,16 +225,13 @@ gmf.AuthenticationController.prototype.resetPassword = function() {
   var error = this.gettextCatalog.getString('An error occured while reseting the password.');
 
   this.gmfAuthentication_.resetPassword(this.loginVal).then(
-      goog.bind(
           /**
            * @param {gmf.AuthenticationDefaultResponse} respData Response.
            */
-          function(respData) {
+          (function(respData) {
             this.resetPasswordModalShown = true;
             this.resetError_();
-          },
-          this
-      ),
+          }).bind(this),
       this.setError_.bind(this, error)
     );
 };
