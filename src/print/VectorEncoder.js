@@ -262,6 +262,11 @@ ngeo.print.VectorEncoder.prototype.encodeVectorStylePoint_ = function(symbolizer
         symbolizer.graphicWidth = size[0] * scale;
         symbolizer.graphicHeight = size[1] * scale;
       }
+      const anchor = imageStyle.getAnchor();
+      if (anchor) {
+        symbolizer.labelAnchorPointX = anchor[0];
+        symbolizer.labelAnchorPointY = anchor[1];
+      }
       let rotation = imageStyle.getRotation();
       if (isNaN(rotation)) {
         rotation = 0;
